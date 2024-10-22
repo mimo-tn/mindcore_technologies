@@ -1,0 +1,1 @@
+# mindcore_technologies
