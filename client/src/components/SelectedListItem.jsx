@@ -40,18 +40,18 @@
 //         </Box>
 //     );
 // }
+// SelectedListItem.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import PeopleIcon from '@mui/icons-material/People';
 import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SpamIcon from '@mui/icons-material/Report';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
-export default function SelectedListItem({ collapsed }) {
+export default function SelectedListItem({ collapsed, privilege }) {
     const navigate = useNavigate();
 
     const handleListItemClick = (path) => {
@@ -59,32 +59,40 @@ export default function SelectedListItem({ collapsed }) {
     };
 
     return (
-        <div style={{ width: collapsed ? 60 : 240, transition: 'width 0.3s' }}>
+        <div style={{ width: collapsed ? 60 : 240, transition: 'width 0.3s', backgroundColor: '#edf2fa' }}>
             <List>
-                <ListItem button onClick={() => handleListItemClick('/inbox')}>
-                    <ListItemIcon>
-                        <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={!collapsed && 'Inbox'} />
-                </ListItem>
-                <ListItem button onClick={() => handleListItemClick('/drafts')}>
-                    <ListItemIcon>
-                        <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={!collapsed && 'Drafts'} />
-                </ListItem>
-                <ListItem button onClick={() => handleListItemClick('/trash')}>
-                    <ListItemIcon>
-                        <DeleteIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={!collapsed && 'Trash'} />
-                </ListItem>
-                <ListItem button onClick={() => handleListItemClick('/spam')}>
-                    <ListItemIcon>
-                        <SpamIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={!collapsed && 'Spam'} />
-                </ListItem>
+                {privilege === 'admin' && (
+                    <>
+                        <ListItem button onClick={() => handleListItemClick('/feuille-de-temps')}>
+                            <ListItemIcon>
+                                <DashboardIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={!collapsed && 'Feuille de Temps'} />
+                        </ListItem>
+                        <ListItem button onClick={() => handleListItemClick('/manage-users')}>
+                            <ListItemIcon>
+                                <PeopleIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={!collapsed && 'Gérer les utilisateurs'} />
+                        </ListItem>
+                    </>
+                )}
+                {privilege === 'user' && (
+                    <>
+                        <ListItem button onClick={() => handleListItemClick('/user-dashboard')}>
+                            <ListItemIcon>
+                                <DashboardIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={!collapsed && 'Gestion des utilisateurs'} />
+                        </ListItem>
+                        <ListItem button onClick={() => handleListItemClick('/inbox')}>
+                            <ListItemIcon>
+                                <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={!collapsed && 'Boîte de réception'} />
+                        </ListItem>
+                    </>
+                )}
             </List>
         </div>
     );

@@ -290,7 +290,7 @@ export default function InBox({ content }) {
                                     sx={{ border: 0 }}
                                 />
                             ) : (
-                                <Skeleton height={400} > Loading...</Skeleton>// Placeholder while loading
+                                <Skeleton height={400} > Loading... </Skeleton>// Placeholder while loading
                             )}
                         </Grid>
 

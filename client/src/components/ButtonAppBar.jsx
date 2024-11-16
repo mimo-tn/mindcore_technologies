@@ -35,6 +35,7 @@
 //     );
 // }
 
+// ButtonAppBar.jsx
 import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -43,26 +44,18 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Collapse from '@mui/material/Collapse';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SpamIcon from '@mui/icons-material/Report';
 
-export default function ButtonAppBar({ onToggle }) {
+export default function ButtonAppBar({ onToggle, onLogout, user }) {
     const [collapsed, setCollapsed] = useState(false);
-
+    console.log("salllllllluu", user)
     const handleToggle = () => {
         setCollapsed(!collapsed);
-        if (onToggle) onToggle(); // Call the toggle function from parent if needed
+        if (onToggle) onToggle(); // Appelle la fonction de basculement si nécessaire
     };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: '#4a90e2' }} >
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -81,9 +74,17 @@ export default function ButtonAppBar({ onToggle }) {
                             style={{ width: '20%', marginTop: 8 }}
                         />
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {user && (
+                        <Typography variant="body1" component="div" sx={{ marginRight: 2 }}>
+                            {user}
+                        </Typography>
+                    )}
+                    <Button color="inherit" onClick={onLogout}>
+                        {user ? 'Logout' : 'Login'}
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>
     );
 }
+

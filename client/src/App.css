@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,34 @@
   to {
     transform: rotate(360deg);
   }
+} */
+/* App.css */
+
+/* CSS pour fixer ButtonAppBar et SelectedListItem */
+
+.AppBar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; /* Assurez-vous que l'AppBar est au-dessus du contenu */
+}
+
+.SelectedListItem-container {
+  position: fixed;
+  top: 60px; /* Ajustez selon la hauteur de votre AppBar */
+  left: 0;
+  width: 250px; /* Ajustez la largeur de la liste selon vos besoins */
+  height: 100%;
+  z-index: 5; /* Assurez-vous que la liste soit derrière l'AppBar */
+  overflow-y: auto;
+}
+
+.content-container {
+  margin-left: 0px; /* Laisser de l'espace pour la SelectedListItem */
+  margin-top: 0px; /* Laisser de l'espace pour l'AppBar */
+  padding: 20px;
+  width: calc(100% - 250px); /* Ajuster la largeur pour ne pas chevaucher la liste */
+  overflow-y: auto;
+  background-color: #f8f8f8;
 }
